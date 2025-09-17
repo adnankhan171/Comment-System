@@ -1,12 +1,12 @@
 # app/auth.py
 import os
 from datetime import datetime, timedelta
-from passlib.context import CryptContext
-from jose import jwt,  JWTError
+from passlib.context import CryptContext # type:ignore
+from jose import jwt,  JWTError # type:ignore
 
-from fastapi import Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer
-from sqlmodel import Session, select
+from fastapi import Depends, HTTPException, status # type:ignore
+from fastapi.security import OAuth2PasswordBearer # type:ignore
+from sqlmodel import Session, select # type:ignore
 
 from .models import User
 from .db import get_session

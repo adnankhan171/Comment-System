@@ -1,6 +1,6 @@
 # app/routers/posts_router.py
-from fastapi import APIRouter, Depends, HTTPException, status, Query, Request
-from sqlmodel import Session, select
+from fastapi import APIRouter, Depends, HTTPException, status, Query, Request # type:ignore
+from sqlmodel import Session, select # type:ignore
 from typing import List
 
 from ..db import get_session

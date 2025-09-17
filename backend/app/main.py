@@ -1,6 +1,6 @@
 # app/main.py
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+from fastapi import FastAPI # type:ignore
+from fastapi.middleware.cors import CORSMiddleware # type:ignore
 # from slowapi.middleware import SlowAPIMiddleware
 # from slowapi.errors import RateLimitExceeded
 # from slowapi import _rate_limit_exceeded_handler

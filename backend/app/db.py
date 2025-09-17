@@ -1,5 +1,5 @@
 # app/db.py
-from sqlmodel import create_engine, SQLModel, Session 
+from sqlmodel import create_engine, SQLModel, Session  # type:ignore
 from typing import Generator
 
 DATABASE_URL = "sqlite:///./app.db"

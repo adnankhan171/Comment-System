@@ -1,8 +1,8 @@
 # app/models.py
-from sqlmodel import SQLModel, Field
+from sqlmodel import SQLModel, Field # type:ignore
 from typing import Optional
 from datetime import datetime, timezone
-from sqlalchemy import Column, String, Boolean, UniqueConstraint
+from sqlalchemy import Column, String, Boolean, UniqueConstraint # type:ignore
 
 class User(SQLModel, table=True):
     id: Optional[int]= Field(default=None, primary_key=True)

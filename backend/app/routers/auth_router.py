@@ -1,6 +1,6 @@
 # app/routers/auth_router.py
-from fastapi import APIRouter, Depends, HTTPException, status
-from sqlmodel import Session, select
+from fastapi import APIRouter, Depends, HTTPException, status # type:ignore
+from sqlmodel import Session, select # type:ignore
 
 from ..schemas import UserCreate, UserRead, Token, UserLogin
 from ..models import User
