@@ -4,13 +4,13 @@ from sqlmodel import Session, select
 from ..db import get_session
 from ..models import CommentLike, Comment
 from ..auth import get_current_user
-from ..libs.limiter import limiter
+from ..libs.limiter import limiter  # to be replaced with reverse proxy
 from sqlalchemy import func
 
 router = APIRouter(tags=["likes"])
 
 @router.post("/comments/{comment_id}/like")
-@limiter.limit("500/minute")   # DoS protection
+# @limiter.limit("500/minute")   # DoS protection
 def toggle_like(request:Request,comment_id: int, session: Session = Depends(get_session), current_user = Depends(get_current_user)):
     comment = session.get(Comment, comment_id)
     if not comment:

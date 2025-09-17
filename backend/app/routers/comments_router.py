@@ -7,13 +7,13 @@ from ..db import get_session
 from ..models import Comment, Post, CommentLike
 from ..schemas import CommentCreate, CommentOut
 from ..auth import get_current_user
-from ..libs.limiter import limiter
+from ..libs.limiter import limiter  # to be replaced with reverse proxy
 from sqlalchemy import func
 
 router = APIRouter(tags=["comments"])
 
 @router.post('/posts/{post_id}/comments',response_model=CommentOut)
-@limiter.limit("200/minute") # DoS protection for comment creation
+# @limiter.limit("200/minute") # DoS protection for comment creation
 def create_comment(request:Request,post_id: int, payload: CommentCreate, session: Session = Depends(get_session), current_user = Depends(get_current_user)):
     post = session.get(Post, post_id)
     if not post:

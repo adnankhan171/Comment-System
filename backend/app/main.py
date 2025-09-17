@@ -21,7 +21,7 @@ origins = [
 # Add the CORS middleware to the application
 app.add_middleware(
     CORSMiddleware,
-    allow_origins= ["*"],#origins, # This allows your frontend's domain to access the API
+    allow_origins= origins,#origins, # This allows your frontend's domain to access the API
     allow_credentials=True, # Allows cookies and authorization headers
     allow_methods=["*"], # Allows all HTTP methods (GET, POST, PUT, DELETE, OPTIONS, etc.)
     allow_headers=["*"], # Allows all headers

@@ -7,12 +7,14 @@ from ..db import get_session
 from ..models import Post
 from ..schemas import PostCreate, PostRead
 from ..auth import get_current_user
-from ..libs.limiter import limiter
+from ..libs.limiter import limiter   # to be replaced with reverse proxy
 
 router = APIRouter(prefix='/posts',tags=["posts"])
 
-@router.post('/',response_model=PostRead)
-@limiter.limit('200/minute') # DoS protection for create posts
+# serialization is handled by response model
+# deserialization is handled by Pydantic schema classes
+@router.post('/',response_model=PostRead) 
+# @limiter.limit('200/minute') # DoS protection for create posts
 def create_post(request:Request,payload: PostCreate, session: Session=Depends(get_session), current_user = Depends(get_current_user)):
     post= Post(author_id=current_user.id, title=payload.title, content=payload.content)
     session.add(post)
