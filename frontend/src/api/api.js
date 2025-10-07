@@ -27,6 +27,7 @@ export const fetchPosts = () => api.get("/posts/");
 export const fetchPost = (id) => api.get(`/posts/${id}`);
 export const createPost = (title, content) =>
   api.post("/posts/", { title, content });
+export const deletePost = (id) => api.delete(`/posts/${id}`);
 
 // Comments
 export const fetchComments = (postId) =>
@@ -35,3 +36,8 @@ export const createComment = (postId, content, parentId = null) =>
   api.post(`/posts/${postId}/comments`, { content, parent_id: parentId });
 export const toggleLike = (commentId) =>
   api.post(`/comments/${commentId}/like`);
+
+
+// New Comment API Calls
+export const deleteComment = (commentId) => api.delete(`/comments/${commentId}`);
+export const updateComment = (commentId, content) => api.patch(`/comments/${commentId}`, { content });
