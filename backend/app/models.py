@@ -12,6 +12,7 @@ class User(SQLModel, table=True):
     username: str = Field(sa_column=Column("username", String, nullable=False, unique=True)) 
     email: str = Field(sa_column=Column("email", String, nullable=False, unique=True))
     password_hash: str
+    is_verified:bool
     created_at: datetime=Field(default_factory=get_current_utc_time)
     
 class Post(SQLModel, table=True):

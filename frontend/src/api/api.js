@@ -22,6 +22,9 @@ export const loginUser = (username, password) =>
 export const registerUser = (username, email, password) =>
   api.post("/auth/register", { username, email, password });
 
+export const verifyEmail = (email, otp) => 
+  api.post("/auth/verify-email", {email, otp});
+
 // Posts
 export const fetchPosts = () => api.get("/posts/");
 export const fetchPost = (id) => api.get(`/posts/${id}`);

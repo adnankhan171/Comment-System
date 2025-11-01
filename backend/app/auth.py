@@ -13,7 +13,7 @@ from .db import get_session
 
 SECRET_KEY = os.environ.get("SECRET_KEY","abcde")
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 60*24 # 24 hours for dev
+ACCESS_TOKEN_EXPIRE_MINUTES = 5 # 5 min for dev
 
 pwd_context = CryptContext(schemes=['bcrypt'], deprecated="auto") # password context, hashmigration for new algo new hash generation
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")

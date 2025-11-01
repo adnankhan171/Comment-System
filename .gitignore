@@ -27,3 +27,4 @@ dist-ssr
 cvenv
 app.db
 todo.txt
+.env
