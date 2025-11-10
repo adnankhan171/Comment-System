@@ -1,7 +1,7 @@
 # app/main.py
 from fastapi import FastAPI # type:ignore
 from fastapi.middleware.cors import CORSMiddleware # type:ignore
-from core.redis_client import redis_client
+from app.core.redis_client import redis_client
 from .db import init_db
 from .routers import auth_router, posts_router, comments_router, likes_router
 import uvicorn
@@ -50,17 +50,6 @@ app.include_router(auth_router.router)
 app.include_router(posts_router.router)
 app.include_router(comments_router.router)
 app.include_router(likes_router.router)
-
-
-# @app.on_event("startup")
-# async def on_startup():
-#     init_db()
-#     try:
-#         pong = await redis_client.ping()
-#         if pong:
-#             print("✅ Connected to Redis")
-#     except Exception as e:
-#         print(f"⚠️ Redis connection failed: {e}")
 
     
 if __name__ == "__main__":

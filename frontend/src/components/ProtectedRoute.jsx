@@ -1,4 +1,4 @@
-    import { Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { isLoggedIn } from "../api/auth";
 
 function ProtectedRoute({ children }) {

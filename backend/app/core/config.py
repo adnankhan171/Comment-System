@@ -12,8 +12,8 @@ conf = ConnectionConfig(
     MAIL_PORT=int(os.getenv("MAIL_PORT", 465)),
     MAIL_SERVER=os.getenv("MAIL_SERVER"),
     MAIL_FROM_NAME=os.getenv("MAIL_FROM_NAME", "FastAPI App"),
-    MAIL_TLS=os.getenv("MAIL_TLS", "False").lower() == "true",
-    MAIL_SSL=os.getenv("MAIL_SSL", "True").lower() == "true",
+    MAIL_STARTTLS=os.getenv("MAIL_TLS", "False").lower() == "true",
+    MAIL_SSL_TLS=os.getenv("MAIL_SSL", "True").lower() == "true",
     USE_CREDENTIALS=True,
     VALIDATE_CERTS=True,
 )

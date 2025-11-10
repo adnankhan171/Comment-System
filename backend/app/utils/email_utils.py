@@ -7,7 +7,7 @@ from app.core.config import conf
 def generate_otp()->str:
     return str(random.randint(100000,999999))
 
-async def sent_otp_mail(to_email:str,otp:str):
+async def send_otp_mail(to_email:str,otp:str):
     subject = "Your OTP Verification Code"
     body = (
         f"Your OTP code is {otp}.\n\n"

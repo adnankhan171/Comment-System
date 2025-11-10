@@ -2,14 +2,14 @@
 from fastapi import APIRouter, Depends, HTTPException, status # type:ignore
 from sqlmodel import Session, select # type:ignore
 from datetime import datetime, timedelta
-from ..schemas import UserCreate, UserRead, Token, UserLogin
+from ..schemas import UserCreate, UserRead, Token, UserLogin, MessageResponse
 from ..models import User
 from ..db import get_session
 from ..auth import get_password_hash, verify_password, create_access_token
-from ..utils.email_utils import generate_otp, send_otp_email
+from ..utils.email_utils import generate_otp, send_otp_mail
 from pydantic import BaseModel
 import json
-from core.redis_client import redis_client
+from app.core.redis_client import redis_client
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
@@ -48,7 +48,7 @@ async def verify_email(data:VerifyEmailRequest,session:Session=Depends(get_sessi
     return {"message": "Email verified successfully. You can now log in."}
     
 
-@router.post("/register",response_model=UserRead)
+@router.post("/register",response_model=MessageResponse)
 async def register(data: UserCreate, session: Session = Depends(get_session)):
     # basic uniqueness check
     exists = session.exec(select(User).where((User.username == data.username) | (User.email == data.email))).first()
@@ -58,19 +58,21 @@ async def register(data: UserCreate, session: Session = Depends(get_session)):
     
     otp = generate_otp()
     expires_in = 600 # 10 minutes
-    
+    hashed_pw = get_password_hash(data.password)
     user_data = {
+        "username":data.username,
         "email":data.email,
-        "otp":otp
+        "password_hash": hashed_pw,
+        "otp": otp,
     }
     #store user data temporarily in Redis
     await redis_client.setex(f"user_otp:{data.email}",expires_in,json.dumps(user_data))
     
     # send otp via email
-    await send_otp_email(data.email, otp)
+    await send_otp_mail(data.email, otp)
     
     # Send email
-    send_otp_email(data.email, otp)
+    send_otp_mail(data.email, otp)
 
     return {"message":"OTP sent to your email please verify within 10 minutes"}
 

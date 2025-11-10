@@ -2,6 +2,9 @@ from pydantic import BaseModel, EmailStr # type:ignore
 from typing import Optional, List
 from datetime import datetime
 
+class MessageResponse(BaseModel):
+    message: str
+
 class UserCreate(BaseModel):
     username: str 
     email: EmailStr
