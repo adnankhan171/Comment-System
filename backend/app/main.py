@@ -30,6 +30,11 @@ async def lifespan(app: FastAPI):
         
 app = FastAPI(title="Comment System API",lifespan=lifespan)
 
+
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to the Comment System API"}
+
 origins = [
     "http://localhost",
     "http://localhost:3000",

@@ -6,4 +6,5 @@ python-jose[cryptography]
 slowapi
 python-multipart
 pydantic
-pydantic[email]
+pydantic[email]redis
+fastapi-mail

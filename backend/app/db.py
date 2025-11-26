@@ -1,11 +1,13 @@
 # app/db.py
 from sqlmodel import create_engine, SQLModel, Session  # type:ignore
 from typing import Generator
+from dotenv import load_dotenv
+import os
+load_dotenv()
+# DATABASE_URL = "sqlite:///./app.db"
+DATABASE_URL = os.getenv("DB_URL")
 
-DATABASE_URL = "sqlite:///./app.db"
-
-# For SQLite in dev we need check_same_thread=False
-engine = create_engine(DATABASE_URL, echo=False, connect_args={"check_same_thread":False})
+engine = create_engine(DATABASE_URL, echo=False)
 
 def init_db() -> None:
     SQLModel.metadata.create_all(engine)
